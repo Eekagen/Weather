@@ -1,3 +1,4 @@
+import uuid
 import boto3
 import random
 import datetime
@@ -20,9 +21,10 @@ tables = dynamoDb.tables.all()
 def GenerateTemp(weather):
     ts = datetime.datetime.now()
     timestamp = int(ts.timestamp() * 1000)
-    tabled = dynamoDb.Table('Puck_Figs')
+    tabled = dynamoDb.Table('Pucking_Figs')
     tabled.put_item(
     Item={
+        'guid': str(uuid.uuid4()),
         'zipcode': str(weather.zip),
         'Humidity': weather.humidity,
         'Temperature': weather.temperature,
